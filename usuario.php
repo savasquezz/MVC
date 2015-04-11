@@ -10,8 +10,9 @@ if ($action == 'registrar') {
         
         $nombre = $_POST['nombre'];
         $edad = $_POST['edad'];
+        $ciudad = $_POST['ciudad'];
         
-        mysql_query("insert into usuario values('$nombre', '$edad')");
+        mysql_query("insert into usuario values('$nombre', '$edad', '$ciudad')");
         header("location:usuario.php?action=registrar");
     } else {
         $usuarios = mysql_query("select * from usuario");
@@ -19,6 +20,11 @@ if ($action == 'registrar') {
     }
 } else if ($action == 'editar') {
     require './vistas/usuario/editar.php';
+
+} else if ($action == 'delete') {
+    $nombre = $_GET['nombre'];
+    mysql_query("delete from usuario where nombre='$nombre'");
+    header("location:usuario.php?action=registrar");
 }
   
   
